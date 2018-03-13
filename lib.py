@@ -15,7 +15,7 @@ def check(article,filename):
         if n != 0:
             result.append('[' + i + '] appears ' + str(n) + ' time(s).')
     for i in noreg:
-        n = article.count(i)
+        n = article.upper().count(i.upper())
         if n != 0:
             result.append('[' + i + '] appears ' + str(n) + ' time(s).')
     result = sorted(result)
