@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Sensitive Words Check">
+    <meta name="keywords" content="HTML,CSS,Python,JavaScript,jQuery,Flask,JSON">
+    <meta name="author" content="Sunshine">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if name=='root' %}Sensitive Words Check{% elif name=='setting' %}Setting{% endif %}</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <script type=text/javascript>
+        {% if name=='root' %}
+        $(function() {
+            $('#check').on('click', function() {
+                $.getJSON('/check', {
+                    q: $('#input').val()
+                }, function(data) {
+                    $('#output').val(String(data.result).replace(/,/g, '\n'));
+                });
+                return false;
+            });
+        });
+
+        function copyText() {
+            var content = document.getElementById('input');
+            content.select();
+            document.execCommand('Copy');
+            if (content.value !== '') {
+                alert('Text copied.');
+            }
+        }
+
+        function clearContents() {
+            $('#input').val('');
+            $('#output').val('');
+        }
+        {% elif name=='setting' %}
+        $(function() {
+            load();
+            $('#save').on('click', function() {
+                $.getJSON('/save', {
+                    q: $('#input').val()
+                }, function(data) {
+                    if (data.result == 'OK') {
+                        alert('Success!');
+                    }
+                });
+            });
+            $('#load').on('click', function() {
+                $.getJSON('/load', {
+                    q: 'yes'
+                }, function(data) {
+                    if (data.result == 'OK') {
+                        load();
+                        alert('Success!');
+                    }
+                });
+            });
+        });
+
+        function load() {
+            $.get('/static/sensitive_words.txt', {
+                    "_": $.now()
+                },
+                function(data) {
+                    $('#input').val(String(data).replace(/,/g, '\n'));
+                });
+        }
+        {% endif %}
+    </script>
+    <style type="text/css">
+        html,
+        body {
+            height: calc(100% - 2px);
+        }
+
+        textarea {
+            resize: none;
+            padding-left: 0.8em;
+            height: 100%;
+        }
+
+        .form-control {
+            border: 1px solid #007bff;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar bg-white" style="height:8%;">
+        <div class="navbar-header">
+            <a class="navbar-brand text-primary" href="/" style="font-size:24px;">Sensitive Words Check</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="/setting"><i class="material-icons">settings</i></a></li>
+        </ul>
+    </nav>
+    <div class="container-fluid" style="height:92%;">
+        <div class="row" style="height:100%;">
+            <div class="w-50 p-3" style="min-width:400px;">
+                <textarea class="form-control" id="input" placeholder="Copy or enter article here..."></textarea>
+            </div>
+            <div class="p-3" style="width:15%;min-width:150px;">
+                {% if name=='root' %}
+                <button onclick="javascript:void(0)" id="check" type="button" class="btn btn-primary btn-block">Check</button>
+                <button onclick="copyText()" type="button" class="btn btn-primary btn-block">Copy</button>
+                <br>
+                <br>
+                <br>
+                <button onclick="clearContents()" type="button" class="btn btn-primary btn-block">Clear</button>
+                {% elif name=='setting' %}
+                <button onclick="javascript:void(0)" id="save" type="button" class="btn btn-primary btn-block">Save</button>
+                <br>
+                <br>
+                <br>
+                <button onclick="javascript:void(0)" id="load" type="button" class="btn btn-primary btn-block">Load Default</button>
+                <br>
+                <br>
+                <br>
+                <a class="btn btn-primary btn-block" href="/" role="button">Back Home</a>
+                {% endif %}
+            </div>
+            {% if name=='root' %}
+            <div class="p-3" style="width:35%;min-width:250px;">
+                <textarea class="form-control" id="output" readonly></textarea>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+
+</html>
+
+
