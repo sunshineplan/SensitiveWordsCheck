@@ -4,13 +4,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="description" content="Sensitive Words Check">
-    <meta name="keywords" content="HTML,CSS,Python,JavaScript,jQuery,Flask,JSON">
+    <meta name="keywords" content="HTML,CSS,Python,JavaScript,jQuery,Bootstrap,Flask,JSON">
     <meta name="author" content="Sunshine">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% if name=='root' %}Sensitive Words Check{% elif name=='setting' %}Setting{% endif %}</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
 
     <script type=text/javascript>
         {% if name=='root' %}
@@ -91,14 +90,12 @@
 </head>
 
 <body>
-    <nav class="navbar bg-white" style="height:8%;">
-        <div class="navbar-header">
-            <a class="navbar-brand text-primary" href="/" style="font-size:24px;">Sensitive Words Check</a>
+    <header class="navbar navbar-expand navbar-light flex-column flex-md-row">
+        <a class="navbar-brand text-primary" href="/" style="font-size:24px;">Sensitive Words Check</a>
+            <a class="nav-link{% if name=='root' %} active{% endif %}" href="/">Home</a>
+            <a class="nav-link{% if name=='setting' %} active{% endif %}" href="/setting">Setting</a>
         </div>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="/setting"><i class="material-icons">settings</i></a></li>
-        </ul>
-    </nav>
+    </header>
     <div class="container-fluid" style="height:92%;">
         <div class="row" style="height:100%;">
             <div class="w-50 p-3" style="min-width:400px;">
