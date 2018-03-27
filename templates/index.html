@@ -99,8 +99,10 @@
     </header>
     <div class="container-fluid" style="height:92%;">
         <div class="row" style="height:100%;">
+            <div class="col-12 col-sm-9 col-md-6 pt-3">
                 <textarea class="form-control" id="input" placeholder="Copy or enter article here..."></textarea>
             </div>
+            <div class="col-12 col-sm-3 col-md-2 p-0 pt-3">
                 {% if name=='root' %}
                 <button onclick="javascript:void(0)" id="check" type="button" class="btn btn-primary btn-block">Check</button>
                 <button onclick="copyText()" type="button" class="btn btn-primary btn-block">Copy</button>
@@ -121,6 +123,7 @@
                 {% endif %}
             </div>
             {% if name=='root' %}
+            <div class="col-md-4 pt-3">
                 <textarea class="form-control" id="output" readonly></textarea>
             </div>
             {% endif %}
