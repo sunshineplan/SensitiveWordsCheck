@@ -91,17 +91,18 @@
 
 <body>
     <header class="navbar navbar-expand navbar-light flex-column flex-md-row">
-        <a class="navbar-brand text-primary" href="/" style="font-size:24px;">Sensitive Words Check</a>
+        <a class="navbar-brand text-primary m-0 mr-md-3" href="/" style="font-size:24px;">Sensitive Words Check</a>
+        <div class="navbar-nav flex-row" style="font-size:18px;">
             <a class="nav-link{% if name=='root' %} active{% endif %}" href="/">Home</a>
             <a class="nav-link{% if name=='setting' %} active{% endif %}" href="/setting">Setting</a>
         </div>
     </header>
     <div class="container-fluid" style="height:92%;">
         <div class="row" style="height:100%;">
-            <div class="w-50 p-3" style="min-width:400px;">
+            <div class="col-12 col-sm-9 col-md-6 p-3">
                 <textarea class="form-control" id="input" placeholder="Copy or enter article here..."></textarea>
             </div>
-            <div class="p-3" style="width:15%;min-width:150px;">
+            <div class="col-12 col-sm-3 col-md-2 p-3">
                 {% if name=='root' %}
                 <button onclick="javascript:void(0)" id="check" type="button" class="btn btn-primary btn-block">Check</button>
                 <button onclick="copyText()" type="button" class="btn btn-primary btn-block">Copy</button>
@@ -122,7 +123,7 @@
                 {% endif %}
             </div>
             {% if name=='root' %}
-            <div class="p-3" style="width:35%;min-width:250px;">
+            <div class="col-md-4 p-3">
                 <textarea class="form-control" id="output" readonly></textarea>
             </div>
             {% endif %}
