@@ -6,6 +6,9 @@ import re
 
 def check(article,filename):
     result = []
+    if article == '':
+        result.append('Please enter something.')
+        return result
     check_list = file2list(filename)
     reg = [i for i in check_list if '@' in i]
     noreg = [i for i in check_list if '@' not in i]
