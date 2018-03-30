@@ -72,15 +72,10 @@
         {% endif %}
     </script>
     <style type="text/css">
-        html,
-        body {
-            height: calc(100% - 2px);
-        }
-
         textarea {
             resize: none;
             padding-left: 0.8em;
-            height: 100%;
+            height: 800px;
         }
 
         .form-control {
@@ -97,33 +92,27 @@
             <a class="nav-link{% if name=='setting' %} active{% endif %}" href="/setting">Setting</a>
         </div>
     </header>
-    <div class="container-fluid" style="height:92%;">
-        <div class="row" style="height:100%;">
+    <div class="container-fluid">
+        <div class="row">
             <div class="col-sm-9 col-md-6 pb-3 pb-md-0">
                 <textarea class="form-control" id="input" placeholder="Copy or enter article here..."></textarea>
             </div>
-            <div class="col-sm-3 col-md-2 pl-sm-0 p-md-0">
+            <div class="col-sm-3 col-md-2 pb-3 pb-md-0 pl-sm-0 p-md-0">
                 {% if name=='root' %}
                 <button onclick="javascript:void(0)" id="check" type="button" class="btn btn-primary btn-block">Check</button>
                 <button onclick="copyText()" type="button" class="btn btn-primary btn-block">Copy</button>
-                <br>
-                <br>
                 <br>
                 <button onclick="clearContents()" type="button" class="btn btn-primary btn-block">Clear</button>
                 {% elif name=='setting' %}
                 <button onclick="javascript:void(0)" id="save" type="button" class="btn btn-primary btn-block">Save</button>
                 <br>
-                <br>
-                <br>
                 <button onclick="javascript:void(0)" id="load" type="button" class="btn btn-primary btn-block">Load Default</button>
-                <br>
-                <br>
                 <br>
                 <a class="btn btn-primary btn-block" href="/" role="button">Back Home</a>
                 {% endif %}
             </div>
             {% if name=='root' %}
-            <div class="col-md-4">
+            <div class="col-md-4 pb-3 pb-md-0">
                 <textarea class="form-control" id="output" readonly></textarea>
             </div>
             {% endif %}
