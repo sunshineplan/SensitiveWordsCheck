@@ -25,11 +25,12 @@
         });
 
         function copyText() {
-            var content = document.getElementById('input');
-            content.select();
+            var article = document.getElementById('input');
+            article.select();
             document.execCommand('Copy');
-            if (content.value !== '') {
-                alert('Text copied.');
+            article.setSelectionRange(0,0);
+            if (article.value !== '') {
+                alert('Article copied.');
             }
         }
 
@@ -100,7 +101,7 @@
             <div class="col-sm-3 col-md-2 pb-3 pb-md-0 pl-sm-0 p-md-0">
                 {% if name=='root' %}
                 <button onclick="javascript:void(0)" id="check" type="button" class="btn btn-primary btn-block">Check</button>
-                <button onclick="copyText()" type="button" class="btn btn-primary btn-block">Copy</button>
+                <button onclick="copyText()" type="button" class="btn btn-primary btn-block">Copy Article</button>
                 <br>
                 <button onclick="clearContents()" type="button" class="btn btn-primary btn-block">Clear</button>
                 {% elif name=='setting' %}
