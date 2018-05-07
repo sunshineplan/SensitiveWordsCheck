@@ -18,16 +18,16 @@ def setting():
     return render_template('index.html', name='setting')
 
 
-@app.route('/check')
+@app.route('/check', methods=['POST'])
 def sensitive_words_check():
-    input = request.args.get('q', 0, type=str)
+    input = request.form.get('q', 0, type=str)
     result = check(input, 'static/sensitive_words.txt')
     return jsonify(result=result)
 
 
-@app.route('/save')
+@app.route('/save', methods=['POST'])
 def save_config():
-    input = request.args.get('q', 0, type=str)
+    input = request.form.get('q', 0, type=str)
     str2file(input, 'static/sensitive_words.txt')
     return jsonify(result='OK')
 

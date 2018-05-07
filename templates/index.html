@@ -15,11 +15,11 @@
         {% if name=='root' %}
         $(function() {
             $('#check').on('click', function() {
-                $.getJSON('/check', {
+                $.post('/check', {
                     q: $('#input').val()
                 }, function(data) {
                     $('#output').val(String(data.result).replace(/,/g, '\n'));
-                });
+                }, 'json');
                 return false;
             });
         });
@@ -41,13 +41,13 @@
         $(function() {
             load();
             $('#save').on('click', function() {
-                $.getJSON('/save', {
+                $.post('/save', {
                     q: $('#input').val()
                 }, function(data) {
                     if (data.result == 'OK') {
                         alert('Success!');
                     }
-                });
+                }, 'json');
             });
             $('#load').on('click', function() {
                 $.getJSON('/load', {
