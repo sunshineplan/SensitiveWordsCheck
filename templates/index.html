@@ -67,7 +67,7 @@
                     "_": $.now()
                 },
                 function(data) {
-                    $('#input').val(String(data).replace(/,/g, '\n'));
+                    $('#input').val(data);
                 });
         }
         {% endif %}
