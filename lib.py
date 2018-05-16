@@ -7,8 +7,7 @@ import re
 def check(article,filename):
     result = []
     if article == '':
-        result.append('Please enter something.')
-        return result
+        return ['Please enter something.']
     check_list = file2list(filename)
     reg = [i for i in check_list if '@' in i]
     noreg = [i for i in check_list if '@' not in i]
@@ -25,11 +24,7 @@ def check(article,filename):
     if result == []:
         result.append('Congratulations! No sensitive words were found.')
     else:
-        if len(result) == 1:
-            result.insert(0, str(len(result)) + ' sensitive word was found:')
-        else:
-            result.insert(0, str(len(result)) + ' sensitive words were found:')
-        result.insert(1, '')
+        result.insert(0, str(len(result)) + ' sensitive word(s) found:\n')
     return result
 
 
