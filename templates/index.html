@@ -18,7 +18,7 @@
                 $.post('/check', {
                     q: $('#input').val()
                 }, function(data) {
-                    $('#output').val(String(data.result).replace(/,/g, '\n'));
+                    $('#output').val(data.result);
                 }, 'json');
                 return false;
             });
