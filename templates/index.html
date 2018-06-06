@@ -15,7 +15,7 @@
         {% if name=='root' %}
         $(function() {
             $('#check').on('click', function() {
-                $.post('/check', {
+                $.post('check', {
                     q: $('#input').val()
                 }, function(data) {
                     $('#output').val(data.result);
@@ -51,7 +51,7 @@
         $(function() {
             load();
             $('#save').on('click', function() {
-                $.post('/save', {
+                $.post('../save', {
                     q: $('#input').val()
                 }, function(data) {
                     if (data.result == 'OK') {
@@ -60,7 +60,7 @@
                 }, 'json');
             });
             $('#load').on('click', function() {
-                $.getJSON('/load', {
+                $.getJSON('../load', {
                     q: 'yes'
                 }, function(data) {
                     if (data.result == 'OK') {
@@ -72,7 +72,7 @@
         });
 
         function load() {
-            $.get('/static/sensitive_words.txt', {
+            $.get('../static/sensitive_words.txt', {
                     "_": $.now()
                 },
                 function(data) {
@@ -96,11 +96,19 @@
 
 <body>
     <header class="navbar navbar-expand navbar-light flex-column flex-md-row">
-        <a class="navbar-brand text-primary m-0 mr-md-3" href="/" style="font-size:24px;">Sensitive Words Check</a>
+        {% if name=='root' %}
+        <a class="navbar-brand text-primary m-0 mr-md-3" href="" style="font-size:24px;">Sensitive Words Check</a>
         <div class="navbar-nav flex-row" style="font-size:18px;">
-            <a class="nav-link{% if name=='root' %} active{% endif %}" href="/">Home</a>
-            <a class="nav-link{% if name=='setting' %} active{% endif %}" href="/setting">Setting</a>
+            <a class="nav-link active" href="">Home</a>
+            <a class="nav-link" href="setting">Setting</a>
         </div>
+        {% elif name=='setting' %}
+        <a class="navbar-brand text-primary m-0 mr-md-3" href="../" style="font-size:24px;">Sensitive Words Check</a>
+        <div class="navbar-nav flex-row" style="font-size:18px;">
+            <a class="nav-link" href="../">Home</a>
+            <a class="nav-link active" href="../setting">Setting</a>
+        </div>
+        {% endif %}
     </header>
     <div class="container-fluid">
         <div class="row">
@@ -118,7 +126,7 @@
                 <br>
                 <button onclick="javascript:void(0)" id="load" type="button" class="btn btn-primary btn-block">Load Default</button>
                 <br>
-                <a class="btn btn-primary btn-block" href="/" role="button">Back Home</a>
+                <a class="btn btn-primary btn-block" href="../" role="button">Back Home</a>
                 {% endif %}
             </div>
             {% if name=='root' %}
