@@ -38,6 +38,15 @@
             $('#input').val('');
             $('#output').val('');
         }
+         
+        window.onload = function() {
+            data = localStorage.getItem('input');
+            if (data !== null) $('#input').val(data);
+        }
+
+        window.onbeforeunload = function() {
+            localStorage.setItem('data', $('#input').val());
+        }
         {% elif name=='setting' %}
         $(function() {
             load();
