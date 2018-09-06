@@ -9,6 +9,7 @@ def check(article,filename):
     if article == '':
         return ['Please enter something.']
     check_list = file2list(filename)
+    keywords = [i.replace('@', '.?') for i in check_list]
     reg = [i for i in check_list if '@' in i]
     noreg = [i for i in check_list if '@' not in i]
     for i in reg:
@@ -25,7 +26,7 @@ def check(article,filename):
         result.append('Congratulations! No sensitive words were found.')
     else:
         result.insert(0, str(len(result)) + ' sensitive word(s) found:\n')
-    return result
+    return result, keywords
 
 
 def file2list(filename):
