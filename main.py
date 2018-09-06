@@ -22,7 +22,7 @@ def setting():
 def sensitive_words_check():
     input = request.form.get('q', 0, type=str)
     result, keywords = check(input, 'static/sensitive_words.txt')
-    return jsonify(result='\n'.join(result), keywords='|'.join(keyword))
+    return jsonify(result='\n'.join(result), keywords='|'.join(keywords))
 
 
 @app.route('/save', methods=['POST'])
