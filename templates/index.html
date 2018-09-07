@@ -10,6 +10,9 @@
     <title>{% if name=='root' %}Sensitive Words Check{% elif name=='setting' %}Setting{% endif %}</title>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <!-- highlight-within-textarea https://github.com/lonekorean/highlight-within-textarea -->
+    <link href="/static/highlight-within-textarea.css" rel="stylesheet">
+    <script src="/static/highlight-within-textarea.js"></script>
 
     <script type=text/javascript>
         {% if name=='root' %}
@@ -19,6 +22,9 @@
                     q: $('#input').val()
                 }, function(data) {
                     $('#output').val(data.result);
+                    $('#input').highlightWithinTextarea({
+                        highlight: RegExp(data.keywords, 'gi')
+                    });
                 }, 'json');
                 return false;
             });
@@ -86,6 +92,10 @@
             resize: none;
             height: 800px;
             border: 1px solid #007bff;
+        }
+
+        .hwt-content mark {
+            background-color: #ffff00;
         }
     </style>
 </head>
