@@ -20,21 +20,21 @@ def setting():
 
 @app.route('/check', methods=['POST'])
 def sensitive_words_check():
-    input = request.form.get('q', 0, type=str)
+    input = request.form.get('q')
     result, keywords = check(input, 'static/sensitive_words.txt')
     return jsonify(result='\n'.join(result), keywords='|'.join(keywords))
 
 
 @app.route('/save', methods=['POST'])
 def save_config():
-    input = request.form.get('q', 0, type=str)
+    input = request.form.get('q')
     str2file(input, 'static/sensitive_words.txt')
     return jsonify(result='OK')
 
 
 @app.route('/load')
 def load():
-    input = request.args.get('q', 0, type=str)
+    input = request.args.get('q')
     if input == 'yes':
         copyfile('static/default.txt', 'static/sensitive_words.txt')
         return jsonify(result='OK')
