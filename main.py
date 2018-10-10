@@ -23,7 +23,12 @@ def sensitive_words_check():
     input = request.form.get('q')
     if input == '':
         return jsonify(result='Please enter something!', keywords='empty')
-    result, keywords = check(input, 'static/sensitive_words.txt')
+    mode = request.form.get('m', 'default')
+    if mode == 'custom':
+        ref = 'static/sensitive_words.txt'
+    else:
+        ref = 'static/default.txt'
+    result, keywords = check(input, ref)
     return jsonify(result='\n'.join(result), keywords='|'.join(keywords))
 
 

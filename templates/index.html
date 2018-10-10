@@ -19,6 +19,19 @@
         $(function() {
             $('#check').on('click', function() {
                 $.post('check', {
+                    m: 'custom',
+                    q: $('#input').val()
+                }, function(data) {
+                    $('#output').val(data.result);
+                    $('#input').highlightWithinTextarea({
+                        highlight: RegExp(data.keywords, 'gi')
+                    });
+                }, 'json');
+                return false;
+            });
+            $('#check_with_default').on('click', function() {
+                $.post('check', {
+                    m: 'default',
                     q: $('#input').val()
                 }, function(data) {
                     $('#output').val(data.result);
@@ -127,6 +140,8 @@
             <div class="col-sm-3 col-md-2 pb-3 pl-sm-0 pt-sm-5 pb-md-0 p-md-0 pt-md-5">
                 {% if name=='root' %}
                 <button onclick="javascript:void(0)" id="check" type="button" class="btn btn-primary btn-block">Check</button>
+                <button onclick="javascript:void(0)" id="check_with_default" type="button" class="btn btn-primary btn-block">Check with Default</button>
+                <br>
                 <button onclick="copyText()" type="button" class="btn btn-primary btn-block">Copy Article</button>
                 <br>
                 <button onclick="clearContents()" type="button" class="btn btn-primary btn-block">Clear</button>
