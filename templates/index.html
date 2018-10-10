@@ -119,9 +119,10 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-9 col-md-6 pb-3 pb-md-0">
-                <textarea class="form-control" id="input" placeholder="Copy or enter article here..."></textarea>
+                <label for="input">{% if name=='root' %}Article{% elif name=='setting' %}Sensitive Words List{% endif %}</label>
+                <textarea class="form-control" id="input" {% if name=='root' %}placeholder="Copy or enter article here..."{% endif %}></textarea>
             </div>
-            <div class="col-sm-3 col-md-2 pb-3 pb-md-0 pl-sm-0 p-md-0">
+            <div class="col-sm-3 col-md-2 pb-3 pl-sm-0 pt-sm-5 pb-md-0 p-md-0 pt-md-5">
                 {% if name=='root' %}
                 <button onclick="javascript:void(0)" id="check" type="button" class="btn btn-primary btn-block">Check</button>
                 <button onclick="copyText()" type="button" class="btn btn-primary btn-block">Copy Article</button>
@@ -137,6 +138,7 @@
             </div>
             {% if name=='root' %}
             <div class="col-md-4 pb-3 pb-md-0">
+                <label for="output">Result</label>
                 <textarea class="form-control" id="output" readonly></textarea>
             </div>
             {% endif %}
