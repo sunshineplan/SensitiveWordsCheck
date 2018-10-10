@@ -21,6 +21,8 @@ def setting():
 @app.route('/check', methods=['POST'])
 def sensitive_words_check():
     input = request.form.get('q')
+    if input == '':
+        return jsonify(result='Please enter something!', keywords='empty')
     result, keywords = check(input, 'static/sensitive_words.txt')
     return jsonify(result='\n'.join(result), keywords='|'.join(keywords))
 

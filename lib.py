@@ -9,6 +9,8 @@ def check(article,filename):
     if article == '':
         return ['Please enter something.']
     check_list = file2list(filename)
+    if check_list == []:
+        return ['Error!\nSensitive Words List is empty.'],['empty']
     keywords = [i.replace('@', '.?') for i in check_list]
     reg = [i for i in check_list if '@' in i]
     noreg = [i for i in check_list if '@' not in i]
