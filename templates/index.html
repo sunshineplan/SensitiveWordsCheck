@@ -148,7 +148,7 @@
                 {% elif name=='setting' %}
                 <button onclick="javascript:void(0)" id="save" type="button" class="btn btn-primary btn-block">Save</button>
                 <br>
-                <a class="btn btn-primary btn-block" href="../static/default.txt" target="_blank" role="button">View Default</a>
+                <button onclick="window.open('../static/default.txt?_='+$.now(), '_blank')" type="button" class="btn btn-primary btn-block">View Default</button>
                 <button onclick="javascript:void(0)" id="load" type="button" class="btn btn-primary btn-block">Load Default</button>
                 <br>
                 <a class="btn btn-primary btn-block" href="../" role="button">Back Home</a>
