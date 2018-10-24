@@ -23,7 +23,9 @@
                     q: $('#input').val()
                 }, function(data) {
                     $('#output').val(data.result);
-                    highlight(data.string_keywords, data.reg_keywords);
+                    $('#input').highlightWithinTextarea({
+                        highlight: RegExp(data.keywords, 'gi')
+                    });
                 }, 'json');
                 return false;
             });
@@ -33,21 +35,13 @@
                     q: $('#input').val()
                 }, function(data) {
                     $('#output').val(data.result);
-                    highlight(data.string_keywords, data.reg_keywords);
+                    $('#input').highlightWithinTextarea({
+                        highlight: RegExp(data.keywords, 'gi')
+                    });
                 }, 'json');
                 return false;
             });
         });
-        
-        function highlight(string_keywords, reg_keywords) {
-            var keywords = string_keywords;
-            if (reg_keywords != '') {
-                keywords.push(RegExp(reg_keywords, 'gi'));
-            }
-            $('#input').highlightWithinTextarea({
-                highlight: keywords
-            });
-        }
 
         function copyText() {
             var article = document.getElementById('input');
