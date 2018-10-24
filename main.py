@@ -28,8 +28,8 @@ def sensitive_words_check():
         ref = 'static/sensitive_words.txt'
     else:
         ref = 'static/default.txt'
-    result, keywords = check(input, ref)
-    return jsonify(result='\n'.join(result), keywords='|'.join(keywords))
+    result, reg_keywords, string_keywords = check(input, ref)
+    return jsonify(result='\n'.join(result), reg_keywords='|'.join(reg_keywords), string_keywords=string_keywords)
 
 
 @app.route('/save', methods=['POST'])
