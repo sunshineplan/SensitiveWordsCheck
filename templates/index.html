@@ -18,22 +18,30 @@
         {% if name=='root' %}
         $(function() {
             $('#check').on('click', function() {
+                $('#check').attr("disabled", true);
+                $('#check_with_default').attr("disabled", true);
                 $.post('check', {
                     m: 'custom',
                     q: $('#input').val()
                 }, function(data) {
                     $('#output').val(data.result);
                     highlight(data.string_keywords, data.reg_keywords);
+                    $('#check').attr("disabled", false);
+                    $('#check_with_default').attr("disabled", false);
                 }, 'json');
                 return false;
             });
             $('#check_with_default').on('click', function() {
+                $('#check').attr("disabled", true);
+                $('#check_with_default').attr("disabled", true);
                 $.post('check', {
                     m: 'default',
                     q: $('#input').val()
                 }, function(data) {
                     $('#output').val(data.result);
                     highlight(data.string_keywords, data.reg_keywords);
+                    $('#check').attr("disabled", false);
+                    $('#check_with_default').attr("disabled", false);
                 }, 'json');
                 return false;
             });
