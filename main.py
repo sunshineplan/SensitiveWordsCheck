@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-from flask import Flask, render_template, request, jsonify
 from shutil import copyfile
+
+from flask import Flask, jsonify, render_template, request
+
 from lib import check, str2file
 
 app = Flask(__name__)
@@ -46,6 +48,7 @@ def load():
         copyfile('static/default.txt', 'static/sensitive_words.txt')
         return jsonify(result='OK')
     return jsonify(result='0')
+
 
 if __name__ == '__main__':
     app.run()
