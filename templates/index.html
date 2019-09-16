@@ -35,9 +35,12 @@
             }, function(data) {
                 $('#output').val(data.result);
                 highlight(data.string_keywords, data.reg_keywords);
+            }, 'json').fail(function() {
+                $('#output').val('Error');
+            }).always(function() {
                 $('#check').attr("disabled", false);
                 $('#check_with_default').attr("disabled", false);
-            }, 'json');
+            });
         }
 
         function highlight(string_keywords, reg_keywords) {
