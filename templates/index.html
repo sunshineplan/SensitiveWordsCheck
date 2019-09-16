@@ -17,42 +17,35 @@
     <script type=text/javascript>
         {% if name=='root' %}
         $(function() {
-            $('#check').on('click', function() {
-                $('#check').attr("disabled", true);
-                $('#check_with_default').attr("disabled", true);
-                $.post('check', {
-                    m: 'custom',
-                    q: $('#input').val()
-                }, function(data) {
-                    $('#output').val(data.result);
-                    highlight(data.string_keywords, data.reg_keywords);
-                    $('#check').attr("disabled", false);
-                    $('#check_with_default').attr("disabled", false);
-                }, 'json');
-                return false;
+            $('#check').click(function() {
+                check('custom');
             });
-            $('#check_with_default').on('click', function() {
-                $('#check').attr("disabled", true);
-                $('#check_with_default').attr("disabled", true);
-                $.post('check', {
-                    m: 'default',
-                    q: $('#input').val()
-                }, function(data) {
-                    $('#output').val(data.result);
-                    highlight(data.string_keywords, data.reg_keywords);
-                    $('#check').attr("disabled", false);
-                    $('#check_with_default').attr("disabled", false);
-                }, 'json');
-                return false;
+            $('#check_with_default').click(function() {
+                check();
             });
         });
         
+        function check(mode='default') {
+            $('#input').highlightTextarea('destroy');
+            $('#check').attr("disabled", true);
+            $('#check_with_default').attr("disabled", true);
+            $.post('check', {
+                m: mode,
+                q: $('#input').val()
+            }, function(data) {
+                $('#output').val(data.result);
+                highlight(data.string_keywords, data.reg_keywords);
+                $('#check').attr("disabled", false);
+                $('#check_with_default').attr("disabled", false);
+            }, 'json');
+        }
+
         function highlight(string_keywords, reg_keywords) {
             var keywords = string_keywords;
             if (reg_keywords != '') {
                 keywords.push(reg_keywords);
             }
-                $('#input').highlightTextarea({
+            $('#input').highlightTextarea({
                 words: keywords
             });
         }
@@ -84,7 +77,7 @@
         {% elif name=='setting' %}
         $(function() {
             load();
-            $('#save').on('click', function() {
+            $('#save').click(function() {
                 $.post('../save', {
                     q: $('#input').val()
                 }, function(data) {
@@ -93,7 +86,7 @@
                     }
                 }, 'json');
             });
-            $('#load').on('click', function() {
+            $('#load').click(function() {
                 $.getJSON('../load', {
                     q: 'yes'
                 }, function(data) {
