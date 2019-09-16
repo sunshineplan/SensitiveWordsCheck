@@ -23,7 +23,7 @@ def check(article, filename):
         n = article.upper().count(i.upper())
         if n != 0:
             result.append('[' + i + '] appears ' + str(n) + ' time(s).')
-    result = sorted(result)
+    result = sorted(result, key=lambda i: int(re.search(r' \d+ ', i).group(0)), reverse=True)
     if result == []:
         result.append('Congratulations! No sensitive words were found.')
     else:
