@@ -27,8 +27,7 @@
         
         function check(mode='default') {
             $('#input').highlightTextarea('destroy');
-            $('#check').attr("disabled", true);
-            $('#check_with_default').attr("disabled", true);
+            $('.check').prop("disabled", true);
             $.post('check', {
                 m: mode,
                 q: $('#input').val()
@@ -38,8 +37,7 @@
             }, 'json').fail(function() {
                 $('#output').val('Error');
             }).always(function() {
-                $('#check').attr("disabled", false);
-                $('#check_with_default').attr("disabled", false);
+                $('.check').prop("disabled", false);
             });
         }
 
@@ -145,8 +143,8 @@
             </div>
             <div class="col-sm-3 col-md-2 pb-3 pl-sm-0 pt-sm-5 pb-md-0 p-md-0 pt-md-5">
                 {% if name=='root' %}
-                <button onclick="javascript:void(0)" id="check" type="button" class="btn btn-primary btn-block">Check</button>
-                <button onclick="javascript:void(0)" id="check_with_default" type="button" class="btn btn-primary btn-block">Check with Default</button>
+                <button onclick="javascript:void(0)" id="check" type="button" class="btn btn-primary btn-block check">Check</button>
+                <button onclick="javascript:void(0)" id="check_with_default" type="button" class="btn btn-primary btn-block check">Check with Default</button>
                 <br>
                 <button onclick="copyText()" type="button" class="btn btn-primary btn-block">Copy Article</button>
                 <br>
